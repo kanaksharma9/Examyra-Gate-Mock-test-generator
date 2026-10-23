@@ -333,7 +333,7 @@ begin
       'time_spent_sec', v_att.time_spent_sec) || jsonb_build_object('standing', attempt_standing(p_attempt_id));
 end $$;
 
--- Safety net for students who closed the tab: auto-submit everything past its deadline. pg_cron runs this every minute.
+-- Safety net for students who closed the tab: auto-submit everything past its deadline. pg_cron runs this daily.
 create or replace function expire_overdue_attempts(p_limit int default 500) returns int
 language plpgsql security definer set search_path = public, pg_temp as $$
 declare r record; n int := 0;

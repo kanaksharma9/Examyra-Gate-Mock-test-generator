@@ -73,9 +73,9 @@ grant execute on function
 do $$
 begin
   if exists (select 1 from pg_extension where extname = 'pg_cron') then
-    perform cron.schedule('expire-overdue-attempts', '* * * * *',   'select public.expire_overdue_attempts()');
+    perform cron.schedule('expire-overdue-attempts', '0 0 * * *',    'select public.expire_overdue_attempts()');
     perform cron.schedule('refresh-global-leaderboard', '*/10 * * * *', 'select public.refresh_global_leaderboard()');
   else
-    raise notice 'pg_cron is not enabled: enable it, or call /api/cron/expire every minute from Vercel Cron instead.';
+    raise notice 'pg_cron is not enabled: enable it, or call /api/cron/expire daily from Vercel Cron instead.';
   end if;
 end $$;

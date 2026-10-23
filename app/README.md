@@ -28,7 +28,8 @@ each environment that should run the app:
 - `ADMIN_TOKEN`
 - `CRON_SECRET`
 
-The cron endpoint in `vercel.json` calls `/api/cron/expire`. Vercel supplies
+The cron endpoint in `vercel.json` calls `/api/cron/expire` once per day at
+00:00 UTC. Vercel supplies
 the `Authorization: Bearer <CRON_SECRET>` header when `CRON_SECRET` is set.
 Do not put server-only secrets in variables prefixed with `NEXT_PUBLIC_`.
 

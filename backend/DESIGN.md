@@ -39,7 +39,7 @@ Answer formats: MCQ `["C"]`; MSQ `["A","C"]` (all must match, no partial credit)
 
 - **Blueprint**: per-subject marks are sampled inside the weightage ranges so core totals exactly 25x1 + 30x2 and the paper is 65 Q / 100 marks (GA 5x1 + 5x2).
 - **Negative marking**: MCQ wrong = -marks/3 (1 mark: -1/3, 2 marks: -2/3). None for MSQ/NAT. Stored unrounded, score rounded to 2 dp.
-- **Timer**: server-authoritative. `deadline_at = start + duration`, 20 s grace. Late reads/writes lazily auto-submit; pg_cron `expire_overdue_attempts` runs every minute as backup.
+- **Timer**: server-authoritative. `deadline_at = start + duration`, 20 s grace. Late reads/writes lazily auto-submit; daily pg_cron `expire_overdue_attempts` is a backup.
 - **Ranking**: only a user's first attempt of a paper counts. Ties share a rank (1,2,2,4); display order breaks ties by time. Global leaderboard needs at least 3 papers, refreshed every 10 min.
 - **Visibility**: public papers can be taken by anyone (shared leaderboard); private ones only by the creator.
 - **Immutability**: an approved question's content cannot be edited. Fix a wrong key with `admin_regrade_question`, which re-scores all finished attempts.
