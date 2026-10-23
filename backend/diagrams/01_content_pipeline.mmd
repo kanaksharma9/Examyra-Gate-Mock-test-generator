@@ -1,0 +1,18 @@
+%%{init: {"flowchart": {"nodeSpacing": 40, "rankSpacing": 50}} }%%
+flowchart TB
+  classDef step fill:#eef2ff,stroke:#6366f1,color:#1e1b4b
+  classDef store fill:#ecfdf5,stroke:#10b981,color:#064e3b
+  classDef you fill:#fff7ed,stroke:#f97316,color:#7c2d12
+  subgraph ONCE["Once (and again only to retrain)"]
+    direction LR
+    A["1 Prepare data<br/>build_dataset.py<br/>tag_subjects.py"]:::step --> B["2 Train<br/>train_qwen.py"]:::step
+  end
+  subgraph LOOP["Every time you need more questions (Colab)"]
+    direction LR
+    C["3 Generate<br/>generate_questions.py<br/>--fill-to 200"]:::step --> D[("Local bank<br/>status: pending")]:::store --> E["4 YOU review<br/>review_bank.py"]:::you --> F["5 Solutions<br/>generate_solutions.py"]:::step --> G["6 Publish<br/>push_to_supabase.py"]:::step
+  end
+  B --> C
+  G --> H[("Supabase<br/>questions + keys<br/>status: approved")]:::store
+  H -. "students report a wrong key" .-> E
+  style ONCE fill:#f8fafc,stroke:#cbd5e1
+  style LOOP fill:#f8fafc,stroke:#cbd5e1

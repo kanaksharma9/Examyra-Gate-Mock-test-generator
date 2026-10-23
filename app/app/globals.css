@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap");
+@import "katex/dist/katex.min.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root { --bg: #f5f7fb; --surface: #fff; --ink: #182338; --muted: #667085; --line: #e4e9f2; --primary: #3155d9; --primary-soft: #edf1ff; --green: #168b5a; --red: #d94444; --purple: #7a4cc2; }
+[data-theme="dark"] { --bg: #111827; --surface: #1b2538; --ink: #f4f7ff; --muted: #a7b2c5; --line: #33415c; --primary-soft: #25345f; }
+* { box-sizing: border-box; } body { margin: 0; background: var(--bg); color: var(--ink); font-family: "DM Sans", sans-serif; } h1,h2,h3 { font-family: "Space Grotesk", sans-serif; } button,input,select { font: inherit; } button:focus-visible,a:focus-visible,input:focus-visible { outline: 3px solid #95aaff; outline-offset: 2px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 10px 30px rgba(30,50,100,.06); }
+.tabular { font-variant-numeric: tabular-nums; } .markdown p { margin: .75rem 0; line-height: 1.75; } .markdown table { border-collapse: collapse; width: 100%; } .markdown td,.markdown th { border: 1px solid var(--line); padding: .5rem; }
+
+/* Exam shell: intentionally echoes the compact, high-contrast GATE workstation layout. */
+.gate-exam-shell { min-height: 100vh; background: #eef1f4; color: #17202b; font-family: Arial, sans-serif; }
+.gate-topbar { display: flex; min-height: 52px; align-items: center; justify-content: space-between; gap: 1rem; background: #343434; color: #fff; padding: 0 1rem; }
+.gate-topbar-title { overflow: hidden; color: #fff200; font-size: .88rem; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.gate-topbar-actions { display: flex; align-items: center; gap: 1rem; font-size: .78rem; white-space: nowrap; }
+.gate-topbar-actions button { display: inline-flex; align-items: center; gap: .35rem; color: white; font-weight: 700; }
+.gate-timer { border-left: 1px solid #777; padding-left: 1rem; font-size: .95rem; font-variant-numeric: tabular-nums; font-weight: 700; }
+.gate-timer.warning { color: #ffd34e; } .gate-timer.danger { color: #ff6d65; }
+.gate-exam-layout { display: flex; min-height: calc(100vh - 52px); }
+.gate-exam-main { display: flex; min-width: 0; flex: 1; flex-direction: column; }
+.gate-section-tabs { display: flex; align-items: center; gap: .35rem; border-bottom: 1px solid #b8c1ca; background: #f8f9fa; padding: .45rem .5rem 0; }
+.gate-section-label { align-self: center; margin-right: .5rem; color: #55616e; font-size: .76rem; font-weight: 700; }
+.gate-section-tabs button { display: inline-flex; align-items: center; gap: .35rem; border: 1px solid #bfc8d0; border-bottom: 0; border-radius: 4px 4px 0 0; background: #eef1f3; color: #0874aa; padding: .55rem .8rem; font-size: .78rem; font-weight: 700; }
+.gate-section-tabs button.active { position: relative; background: #1587b7; color: white; }
+.gate-section-tabs button.active::after { position: absolute; bottom: -5px; left: 50%; width: 10px; height: 10px; transform: translateX(-50%) rotate(45deg); background: #1587b7; content: ""; }
+.gate-question-meta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-bottom: 1px solid #bdc5cc; background: white; padding: .55rem .8rem; color: #46515c; font-size: .78rem; }
+.gate-question-meta em { margin-left: .65rem; color: #e04a34; font-style: normal; }
+.gate-question-meta > div { margin-left: auto; }
+.gate-calculator-trigger { display: grid; place-items: center; color: #eea400; }
+.gate-calculator-popover { position: absolute; z-index: 50; top: 2rem; right: 0; width: 240px; border: 1px solid #9faab4; border-radius: 4px; background: white; padding: .55rem; box-shadow: 0 12px 30px #17202b40; color: #1b2632; }
+.gate-calculator-title { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #d6dce1; padding-bottom: .45rem; color: #4c5965; font-size: .75rem; font-weight: 700; }
+.gate-calculator-title span { display: inline-flex; align-items: center; gap: .25rem; } .gate-calculator-title button { color: #687684; }
+.gate-calculator-display { margin: .55rem 0; overflow: hidden; border: 1px solid #aab4bd; border-radius: 3px; background: #f4f6f7; padding: .55rem; text-align: right; font-family: monospace; white-space: nowrap; }
+.gate-calculator-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .3rem; }
+.gate-calculator-key { min-height: 30px; border: 1px solid #b7c0c8; border-radius: 3px; background: #edf0f2; color: #273440; font-size: .78rem; }
+.gate-calculator-key:hover { background: #dce9ef; } .gate-calculator-equals { background: #1789b8; color: white; }
+.gate-calculator-note { margin: .5rem 0 0; color: #84909b; font-size: .65rem; text-align: center; }
+.gate-question-card { display: flex; min-height: 0; flex: 1; flex-direction: column; margin: .35rem; overflow: hidden; border: 1px solid #c0c7cd; background: white; }
+.gate-question-heading { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #d2d7dc; padding: .55rem .7rem; }
+.gate-question-heading h1 { margin: 0; font-family: Arial, sans-serif; font-size: 1rem; font-weight: 700; } .gate-save-status { color: #65727e; font-size: .72rem; }
+.gate-question-content { min-height: 0; overflow-y: auto; padding: .6rem 1rem 2rem; } .gate-question-content .markdown { max-width: 950px; color: #1c252c; font-size: .95rem; }
+.gate-options { display: grid; gap: .35rem; margin-top: 1.5rem; max-width: 900px; }
+.gate-option { display: flex; align-items: flex-start; gap: .65rem; padding: .5rem .35rem; color: #18212a; } .gate-option:hover { background: #f2f8fb; }
+.gate-option input { margin-top: .35rem; accent-color: #1587b7; } .gate-option-marker { min-width: 1.5rem; font-weight: 700; }
+.gate-nat-answer { margin-top: 1.5rem; max-width: 420px; } .gate-nat-answer label { display: block; margin-bottom: .35rem; font-size: .8rem; font-weight: 700; }
+.gate-nat-answer input { width: 100%; border: 1px solid #9da9b3; border-radius: 3px; padding: .65rem; font-family: monospace; }
+.gate-nat-keypad { display: grid; grid-template-columns: repeat(4, 1fr); gap: .35rem; margin-top: .65rem; } .gate-nat-keypad button { border: 1px solid #b8c1c8; background: #f1f3f4; padding: .45rem; font-size: .75rem; }
+.gate-actionbar { display: flex; align-items: center; gap: .55rem; border-top: 1px solid #b9c2c9; background: #f8f9fa; padding: .5rem; }
+.gate-actionbar button, .gate-dialog-actions button { border-radius: 3px; padding: .58rem .85rem; font-size: .78rem; font-weight: 700; }
+.review-button { border: 1px solid #7650a2; background: #fff; color: #694194; } .clear-button { border: 1px solid #aeb8c0; background: #fff; color: #384550; } .save-button { display: inline-flex; align-items: center; gap: .35rem; margin-left: auto; border: 1px solid #076b97; background: #1284b2; color: #fff; }
+.gate-right-panel { position: relative; display: flex; width: 275px; flex-shrink: 0; flex-direction: column; border-left: 1px solid #aeb8c1; background: #dff1f8; transition: width .2s ease; }
+.gate-right-panel.collapsed { width: 18px; } .gate-collapse-tab { position: absolute; z-index: 3; top: 45%; left: -14px; display: grid; place-items: center; width: 18px; height: 48px; border: 1px solid #1a2229; border-radius: 3px 0 0 3px; background: #1a2229; color: white; }
+.gate-candidate { display: flex; align-items: center; gap: .6rem; min-height: 92px; background: #fff; padding: .6rem; } .gate-avatar { display: grid; width: 58px; height: 64px; place-items: center; border: 1px solid #b4bec7; background: linear-gradient(#eef3f5, #becbd4); font-size: 1.8rem; }
+.gate-candidate span, .gate-candidate b { display: block; } .gate-candidate span { color: #60707c; font-size: .68rem; } .gate-candidate b { margin-top: .3rem; color: #24303a; font-size: .82rem; }
+.gate-legend { display: grid; grid-template-columns: 1fr 1fr; gap: .55rem .35rem; background: #fff; padding: .75rem .55rem; color: #34414b; font-size: .67rem; }
+.gate-legend-item { display: flex; align-items: center; gap: .35rem; } .gate-legend-icon { position: relative; display: grid; width: 26px; height: 26px; flex-shrink: 0; place-items: center; border: 1px solid; border-radius: 3px; font-weight: 700; }
+.gate-legend-icon.answered { background: #65b82e; border-color: #4b951c; color: white; } .gate-legend-icon.not_answered { background: #ef641e; border-color: #c74b0d; color: white; } .gate-legend-icon.not_visited { background: #eef0f2; border-color: #b7bdc4; } .gate-legend-icon.marked, .gate-legend-icon.answered_marked { border-radius: 50%; background: #7951a9; border-color: #5b3788; color: white; }
+.gate-legend-icon i { position: absolute; right: -2px; bottom: -2px; width: 8px; height: 8px; border: 1px solid white; border-radius: 50%; background: #8ed33f; }
+.gate-palette-title { background: #1688b8; color: white; padding: .55rem .7rem; font-size: .92rem; font-weight: 700; } .gate-palette-body { min-height: 0; flex: 1; overflow-y: auto; padding: .7rem; }
+.gate-palette-body h2 { margin: 0 0 .65rem; font-family: Arial, sans-serif; font-size: .78rem; } .gate-palette-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .5rem; }
+.gate-palette-tile { position: relative; min-height: 39px; border: 1px solid; border-radius: 3px; font-size: .8rem; font-weight: 700; box-shadow: 0 1px 1px #0002; } .gate-palette-current { outline: 2px solid #111; outline-offset: 2px; } .gate-palette-dot { position: absolute; right: 3px; bottom: 3px; width: 7px; height: 7px; border: 1px solid white; border-radius: 50%; background: #8ed33f; }
+.gate-submit-button { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; margin: .7rem; border: 1px solid #08739e; border-radius: 3px; background: #1789b8; padding: .7rem; color: white; font-size: .82rem; font-weight: 700; }
+.gate-modal-backdrop { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; background: #10182088; padding: 1rem; } .gate-dialog { width: min(92vw, 520px); max-height: 85vh; overflow-y: auto; border-radius: 5px; background: white; padding: 1rem; box-shadow: 0 20px 50px #0005; }
+.gate-dialog-title { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #d7dce0; padding-bottom: .7rem; } .gate-dialog-title h2 { margin: 0; font-family: Arial, sans-serif; font-size: 1.05rem; }
+.gate-summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .4rem; margin: 1rem 0; } .gate-summary-grid div { border: 1px solid #d1d8de; border-radius: 3px; padding: .6rem; text-align: center; } .gate-summary-grid b,.gate-summary-grid span { display: block; } .gate-summary-grid span { margin-top: .2rem; color: #687681; font-size: .68rem; }
+.gate-dialog-actions { display: flex; justify-content: flex-end; gap: .5rem; } .shortcut-list { display: grid; gap: .65rem; padding: 1rem 0; } .shortcut-list div { display: flex; align-items: center; gap: .8rem; } kbd { min-width: 86px; border: 1px solid #c2cad0; border-bottom-width: 2px; border-radius: 4px; background: #f3f5f6; padding: .3rem .45rem; text-align: center; font-family: monospace; font-size: .75rem; }
+.gate-paper-list { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; padding-top: 1rem; } .gate-paper-list button { display: flex; gap: .6rem; border: 1px solid #d1d8de; border-radius: 3px; background: #f8fafb; padding: .55rem; text-align: left; font-size: .75rem; }
+@media (max-width: 760px) { .gate-topbar { align-items: flex-start; flex-direction: column; padding: .7rem; } .gate-topbar-actions { width: 100%; justify-content: space-between; } .gate-topbar-actions button { font-size: .7rem; } .gate-right-panel { position: fixed; z-index: 20; right: 0; bottom: 0; width: min(92vw, 330px); max-height: 72vh; border-top: 1px solid #aeb8c1; box-shadow: -5px -5px 20px #0002; } .gate-right-panel.collapsed { width: 18px; max-height: 48px; } .gate-actionbar { flex-wrap: wrap; } .gate-save-status { display: none; } }

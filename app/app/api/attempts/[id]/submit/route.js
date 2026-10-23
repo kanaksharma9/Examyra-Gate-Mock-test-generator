@@ -1,0 +1,5 @@
+import { handle, rpc } from "../../../../../lib/api";
+import { requireUser } from "../../../../../lib/auth";
+import { uuid } from "../../../../../lib/validation";
+export const dynamic = "force-dynamic";
+export const POST = handle(async (req, { params }) => { const { client } = await requireUser(req); return rpc(client, "submit_attempt", { p_attempt_id: uuid.parse(params.id) }); });

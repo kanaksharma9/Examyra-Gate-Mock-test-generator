@@ -1,0 +1,28 @@
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+app/.env
+app/.env.*
+!app/.env.example
+
+# JavaScript dependencies and build output
+**/node_modules/
+**/.next/
+**/out/
+**/.vercel/
+**/coverage/
+
+# Python tooling and generated caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Local editor and OS files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+.DS_Store
+Thumbs.db

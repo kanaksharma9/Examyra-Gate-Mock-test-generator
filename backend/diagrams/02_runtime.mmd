@@ -1,0 +1,23 @@
+%%{init: {"flowchart": {"nodeSpacing": 35, "rankSpacing": 60}} }%%
+flowchart LR
+  classDef web fill:#eef2ff,stroke:#6366f1,color:#1e1b4b
+  classDef db fill:#ecfdf5,stroke:#10b981,color:#064e3b
+  classDef fn fill:#fef3c7,stroke:#d97706,color:#78350f
+  classDef off fill:#f3f4f6,stroke:#6b7280,color:#111827
+  COLAB["Colab pipeline<br/>(diagram 1)"]:::off
+  S(("Student")):::web --> UI["Next.js pages<br/>exam, results,<br/>leaderboard"]:::web --> API["Next.js /api routes<br/>login check, error mapping,<br/>rate limit"]:::web
+  subgraph SUPA["Supabase"]
+    direction TB
+    FN["Postgres functions = ALL exam rules<br/>create_paper, start_attempt, save_answers,<br/>submit_attempt, get_attempt, analysis,<br/>leaderboard, report_question"]:::fn
+    CR["pg_cron, every minute:<br/>auto-submit overdue exams"]:::fn
+    T1[("questions + keys<br/>closed to browsers")]:::db
+    T2[("subjects + blueprints")]:::db
+    T3[("papers (frozen)")]:::db
+    T4[("attempts, answers,<br/>subject stats")]:::db
+    T5[("leaderboards")]:::db
+    CR --> FN
+    FN --> T1 & T2 & T3 & T4 & T5
+  end
+  API -- "user JWT" --> FN
+  COLAB -- "service_role key" --> FN
+  style SUPA fill:#f8fafc,stroke:#cbd5e1

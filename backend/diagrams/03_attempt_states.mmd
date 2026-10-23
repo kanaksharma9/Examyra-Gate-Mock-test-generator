@@ -1,0 +1,18 @@
+%%{init: {"themeVariables": {"fontSize": "18px"}, "state": {"nodeSpacing": 60, "rankSpacing": 70}} }%%
+stateDiagram-v2
+  direction TB
+  [*] --> PaperReady: create_paper
+  PaperReady --> InProgress: start_attempt<br/>deadline = now + 180 min
+  InProgress --> Submitted: submit_attempt
+  InProgress --> AutoSubmitted: deadline + 20 s<br/>(cron or next request)
+  Submitted --> Scored
+  AutoSubmitted --> Scored
+  Scored --> [*]: review with answers<br/>and solutions
+  note right of InProgress
+    save_answers = autosave (retry-safe)
+    start_attempt again = resume
+  end note
+  note right of Scored
+    submit again = same result
+    key fix = admin regrade re-scores
+  end note

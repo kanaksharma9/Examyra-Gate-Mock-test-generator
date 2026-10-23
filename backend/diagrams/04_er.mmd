@@ -1,0 +1,51 @@
+erDiagram
+  subjects ||--o{ topics : has
+  subjects ||--o{ questions : classifies
+  subjects ||--o{ blueprint_rules : "weightage"
+  blueprints ||--|{ blueprint_rules : recipe
+  questions ||--|| question_keys : "answer + solution"
+  generation_batches ||--o{ questions : "model lineage"
+  blueprints ||--o{ papers : "used by"
+  profiles ||--o{ papers : creates
+  papers ||--|{ paper_questions : "frozen set"
+  questions ||--o{ paper_questions : "appears in"
+  papers ||--o{ attempts : "taken as"
+  profiles ||--o{ attempts : takes
+  attempts ||--|{ attempt_answers : responses
+  attempts ||--o{ attempt_subject_stats : analysis
+  profiles ||--o{ user_question_seen : "prefer unseen"
+  profiles ||--o{ question_reports : flags
+  questions ||--o{ question_reports : "reported"
+  subjects { smallint id PK
+    text code
+    text name
+    int marks_min
+    int marks_max }
+  questions { uuid id PK
+    text type "MCQ MSQ NAT"
+    int marks "1 or 2"
+    text body_md
+    jsonb options
+    text status "pending approved rejected retired"
+    bool flagged
+    text content_hash UK }
+  question_keys { uuid question_id PK
+    jsonb answer
+    text solution_md
+    int key_version }
+  papers { uuid id PK
+    text visibility
+    int duration_min
+    text idempotency_key }
+  attempts { uuid id PK
+    int attempt_no
+    text status
+    timestamptz deadline_at
+    numeric score
+    bool counts_for_rank }
+  attempt_answers { uuid attempt_id PK
+    uuid question_id PK
+    jsonb response
+    text state
+    bool is_correct
+    numeric marks_awarded }
